@@ -184,9 +184,125 @@
 
 
 
-const _ = require("lodash");
+// const _ = require("lodash");
 
-const items = [1, [2, [3, [4, [5]]]]];
-const newItems = _.flattenDeep(items);
-console.log(newItems);
-console.log("Diabolical");
+// const items = [1, [2, [3, [4, [5]]]]];
+// const newItems = _.flattenDeep(items);
+// console.log(newItems);
+// console.log("Diabolical");
+
+
+
+
+
+
+
+
+
+// console.log("First task");
+// console.time();
+// for (let i = 0; i < 10000000; i++) {
+//     const h3 = document.querySelector("h3");
+//     h3.textContent = `Hey, everyone is waiting on me.`
+// }
+// console.timeEnd();
+
+// console.log("Next task");
+
+
+
+
+
+
+
+
+// // Started operating system process:
+// console.log("First task");
+// setTimeout(() => {
+//     console.log("Second task");
+// }, 0);
+
+// console.log("Third task");
+// // Completed and exited operating system process.
+
+
+
+
+
+
+
+
+// setInterval(() => {
+//     console.log("Hello world!");
+// }, 2000);
+// console.log("I will run first.")
+// // process stays alive unless
+// // Kill process ctrl + C
+// // unexpected error
+
+
+
+
+
+
+
+// const http = require("http");
+
+// const server = http.createServer((req, res) => {
+//     console.log("Request event");
+//     res.end("Welcome to my homepage");
+// });
+
+// server.listen(5000, () => {
+//     console.log("Server listening on port: 5000");
+// });
+
+
+
+
+
+
+
+
+// const http = require("http");
+
+// const server = http.createServer((req, res) => {
+//     if (req.url === "/") {
+//         res.end("Home page");
+//     }
+//     if (req.url === "/about") {
+//         // BLOCKING CODE
+//         for (let i = 0; i < 1000; i++) {
+//             for (let j = 0; j < 1000; j++) {
+//                 console.log(`${i} and ${j}`);
+//             }
+//         }
+//         res.end("About Page")
+//     }
+//     res.end("Error Page")
+// })
+
+// server.listen(5000, () => {
+//     console.log("Server listening on port 5000...");
+// });
+
+
+
+
+
+
+
+
+const {readFile} = require("fs");
+
+const getText = (path) => {
+    return new Promise((resolve, reject) => {
+        readFile(path, "utf-8", (err, data) => {
+    if (err) {
+        reject(err);
+    } else {
+        resolve(data);
+    }
+});
+    });
+}
