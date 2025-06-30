@@ -293,16 +293,142 @@
 
 
 
-const {readFile} = require("fs");
 
-const getText = (path) => {
-    return new Promise((resolve, reject) => {
-        readFile(path, "utf-8", (err, data) => {
-    if (err) {
-        reject(err);
-    } else {
-        resolve(data);
-    }
-});
+
+// const {readFile, writeFile} = require("fs");
+// const util = require("util");
+// const readFilePromise = util.promisify(readFile);
+// const writeFilePromise = util.promisify(writeFile);
+
+// const getText = (path) => {
+//     return new Promise((resolve, reject) => {
+//         readFile(path, "utf-8", (err, data) => {
+//     if (err) {
+//         reject(err);
+//     } else {
+//         resolve(data);
+//     }
+// });
+//     });
+// }
+
+// // getText("./narrative/first.txt")
+// // .then(result => console.log(result))
+// // .catch(err => console.log(err));
+
+// const start = async() => {
+//     try {
+//     const first = await readFilePromise("./narrative/first.txt", "utf-8");
+//     const second = await readFilePromise("./narrative/second.txt", "utf-8");
+//     await writeFilePromise("./narrative/my-ninja.txt", `HERE WE GO AGAIN: ${first} & ${second}`, {flag: "a"});
+//     console.log(first, second);
+// } catch(error) {
+//     console.log(error);
+// }
+// };
+
+// start();
+
+
+
+
+
+
+
+
+// // EVENTS EMITTER:
+// const EventEmitter = require("events");
+
+// const customEmitter = new EventEmitter();
+
+
+// customEmitter.on("response", (name, age) => {
+//     console.log(`Data received: the user's name is ${name} and their age is ${age}`);
+// });
+
+// customEmitter.on("response", () => {
+//     console.log(`Some other logic here`);
+// });
+
+// customEmitter.emit("response", "Prashant", 30);
+
+
+
+
+
+
+
+
+
+
+
+// // Using Event Emitter API:
+// const http = require("http");
+
+// const server = http.createServer();
+// // emits request event
+// // subscribe to it/listen to it/respond to it
+// server.on("request", (req, res) => {
+//     res.end("Hey, bud!");
+// });
+
+// server.listen(5000);
+
+
+
+
+
+
+
+
+
+// // STREAMS:
+// const {writeFileSync} = require("fs");
+// for (let i = 0; i < 10000; i++) {
+//     writeFileSync("./narrative/massive.txt", `Hello world ${i}/n`, {flag: "a"});
+// }
+
+
+
+
+
+
+
+
+
+
+
+// const {createReadStream} = require("fs");
+
+// const stream = createReadStream("./narrative/massive.txt");
+
+// stream.on("data", (result) => {
+//     console.log(result);
+//     // add .toString() after 'result' if you want to see the text instead
+// });
+// stream.on("error", (err) => {
+//     console.log(err);
+// });
+
+
+
+
+
+
+
+
+
+const http = require("http");
+const fs = require("fs");
+
+http.createServer(function(req, res) {
+    // const text = fs.readFileSync("./narrative/massive.txt", "utf-8");
+    // res.end(text);
+    const fileStream = fs.createReadStream("./narrative/massive.txt", "utf-8");
+    fileStream.on("open", () => {
+        fileStream.pipe(res);
     });
-}
+    fileStream.on("error", (err) => {
+        res.end(err);
+    })
+}).listen(5000);
